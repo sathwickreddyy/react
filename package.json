@@ -1,0 +1,30 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "This is my React Learning Application.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sathwick18/react.git"
+  },
+  "keywords": [
+    "sathwick",
+    "react",
+    "learning",
+    "practise",
+    "newToReact"
+  ],
+  "author": "Sathwick Reddy, Yalla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sathwick18/react/issues"
+  },
+  "homepage": "https://github.com/sathwick18/react#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0" 
+  }
+}
+
