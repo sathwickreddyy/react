@@ -26,7 +26,7 @@ const HeadingComponent = () => {
         </div>
     );
 };
-//
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
