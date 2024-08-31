@@ -1,20 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const heading = React.createElement("h1", {id: "heading", xyz:"abc"}, "Hello World From React! ");
+// Babel does JSX => React.createElement => ReactElement-JS Object => HtmlElement(render)
+const jsxHeading = <h1 className="heading">Hello World From React!</h1>;
 
-console.log(heading);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const h1 = React.createElement("h1", {}, "This is react")
-const h2 = React.createElement("h2", {}, "I'm H2 Tag1165132154984")
-const child = React.createElement("div", {id:"child"}, [h1, h2]);
-const parent = React.createElement("div", {id:"parent"}, child);
-
-
-root.render([heading, parent])
-
-// root.render(parent)
-
-// parent.render();
-// JSX.
+// jsxHeading is transpiled into js (Ecma Script ES6) by parcel before it reaches the JS Engine.
+// Parcel deletes the responsibility of transpiling to **Babel**
+root.render(jsxHeading);

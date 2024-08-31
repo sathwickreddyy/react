@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "This is my React Learning Application.",
   "scripts": {
+    "//": "When the react app starts it will run in development mode i.e., when npm run is called",
+
+    "start": "parcel index.html", 
+
+    "//": "For production mode i.e., npm run build",
+
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
