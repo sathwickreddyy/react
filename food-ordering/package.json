@@ -3,21 +3,24 @@
   "version": "1.0.0",
   "description": "Food ordering Application",
   "scripts": {
-    "//": "When the react app starts it will run in development mode i.e., when npm run is called",
-
-    "start": "parcel index.html", 
-
     "//": "For production mode i.e., npm run build",
-
+    "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest"
   },
   "author": "Sathwick Reddy, Yalla",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.35.0",
+    "globals": "^15.9.0",
+    "process": "^0.11.10",
     "parcel": "^2.12.0"
   },
   "dependencies": {
+    
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }
