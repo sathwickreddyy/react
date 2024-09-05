@@ -1,6 +1,6 @@
 import RestroCard from "./RestroCard";
-import restaurentData from "../utils/mockData";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
     // Creating Local State Variable - Super powerful variable.
@@ -23,6 +23,11 @@ const Body = () => {
         console.log(rests);
         setListOfRestaurent(rests);
     };
+
+    // Conditional Rendering.
+    if (listOfRestaurentData.length === 0) {
+        return <Shimmer />;
+    }
 
     return (
         <div className='body'>
