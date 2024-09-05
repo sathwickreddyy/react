@@ -2,6 +2,7 @@ import React from "react";
 import RestroCard from "./RestroCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
     // Creating Local State Variable - Super powerful variable.
@@ -71,7 +72,9 @@ const Body = () => {
             </div>
             <div className='restro-container'>
                 {filteredRestaurents.map((restroInfo) => (
-                    <RestroCard key={restroInfo.info.id} resInfo={restroInfo} />
+                    <Link key={restroInfo.info.id} to={"/restaurants/" + restroInfo.info?.id}>
+                        <RestroCard resInfo={restroInfo} />
+                    </Link>
                 ))}
             </div>
         </div>
