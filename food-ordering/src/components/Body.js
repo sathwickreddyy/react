@@ -1,3 +1,4 @@
+import React from "react";
 import RestroCard from "./RestroCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
