@@ -1,37 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API_URL } from "../utils/constants";
+import useRestaurantMenu from "../utils/hooks/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-    const [resInfo, setResInfo] = useState(null);
-    const [menuItemCards, setMenuItemCards] = useState([]);
     const { restaurantId } = useParams();
 
-    useEffect(() => {
-        fetchMenu();
-    }, []);
+    const resInfo = useRestaurantMenu(restaurantId);
 
-    const fetchMenu = async () => {
-        const data = await fetch(MENU_API_URL + restaurantId);
-        const json = await data.json();
-        console.log(json);
-        const menuInformation = json?.data?.cards[2]?.card?.card?.info;
-        setResInfo(menuInformation);
-        const itemCards =
-            json?.data?.cards[4]?.groupedCard.cardGroupMap?.REGULAR.cards[5]?.card?.card?.itemCards ||
-            json?.data?.cards[4]?.groupedCard.cardGroupMap?.REGULAR.cards[5]?.card?.card?.categories[0]?.itemCards;
-        console.log("Item cards", itemCards);
-        setMenuItemCards(itemCards);
-    };
+    if (resInfo === null) {
+        return <Shimmer />;
+    }
 
-    return resInfo === null ? (
-        <Shimmer />
-    ) : (
+    const menuItemCards =
+        resInfo?.data?.cards[4]?.groupedCard.cardGroupMap?.REGULAR.cards[5]?.card?.card?.itemCards ||
+        resInfo?.data?.cards[4]?.groupedCard.cardGroupMap?.REGULAR.cards[5]?.card?.card?.categories[0]?.itemCards;
+    console.log("Item cards", menuItemCards);
+
+    const { name, costForTwoMessage, cuisines } = resInfo?.data?.cards[2]?.card?.card?.info;
+
+    return (
         <div className='restaurant-menu'>
-            <h1>Name of the Restaurant: {resInfo.name}</h1>
-            <h3>Cuisines: {resInfo.cuisines.join(", ")}</h3>
-            <h3>{resInfo.costForTwoMessage}</h3>
+            <h1>Name of the Restaurant: {name}</h1>
+            <h3>Cuisines: {cuisines.join(", ")}</h3>
+            <h3>{costForTwoMessage}</h3>
             <h1>Menu</h1>
             <ul>
                 {menuItemCards.map((itemCard) => {
