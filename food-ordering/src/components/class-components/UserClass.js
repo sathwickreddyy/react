@@ -23,6 +23,14 @@ class UserClass extends React.Component {
         });
     }
 
+    componentDidUpdate() {
+        console.log("Component updated");
+    }
+
+    componentWillUnmount() {
+        console.log("Component is Gone, if we move to other pages or do something else");
+    }
+
     render() {
         const { name, location } = this.props;
 
@@ -60,4 +68,3 @@ export default UserClass;
  *  }
  *
  */
-
