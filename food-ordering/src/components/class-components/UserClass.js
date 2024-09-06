@@ -5,47 +5,59 @@ class UserClass extends React.Component {
         super(props);
 
         this.state = {
-            count: 0,
-            count2: 0,
+            userInfo: {
+                name: "Default",
+                location: "Default",
+                avatar_url: "Default",
+            },
         };
-
-        console.log("Child Constructor Called");
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // this will be called when this component is rendered and mounted on the actual DOM element.
-        console.log("Child Component Did Mount Called");
+        const data = await fetch("https://api.github.com/users/sathwick18");
+        const json = await data.json();
+        console.log(json);
+        this.setState({
+            userInfo: json,
+        });
     }
 
     render() {
-        console.log("Child Render Called");
-
         const { name, location } = this.props;
 
-        const { count, count2 } = this.state;
-
+        const { userInfo } = this.state;
         return (
             <div className='user-card'>
-                <h2>Name: {name}</h2>
-                <h2>Location: {location}</h2>
+                <h2>Name: {userInfo.name}</h2>
+                <h2>Location: {userInfo.location}</h2>
                 <h3>Contact: sathwick@outlook.in</h3>
-                <h4>Count : {count}</h4>
-                <h4>Count2 : {count2}</h4>
-                <button
-                    onClick={() => {
-                        // We should never update variables directly
-                        // To update we need to use as below
-                        this.setState({
-                            count: this.state.count + 1,
-                            count2: this.state.count2 + 2,
-                        });
-                    }}
-                >
-                    Update Counts
-                </button>
+                <img src={userInfo.avatar_url} alt='Avatar URL' />
             </div>
         );
     }
 }
 
 export default UserClass;
+
+/**
+ * Understanding React Life cycle
+ *
+ * Constructor () - Dummy Values
+ * Render () - Dummy Values
+ *  <HTML Dummy>
+ * componentDidMount() {
+ *      <API Call>
+ *      <this.setState()/>
+ * }
+ *
+ * Phase 2 post the state variable is updated, react will re-render the component
+ *
+ *  Render() - Values fetched from API
+ *          <HTML Values from API>
+ * post dom updation it will invoke the
+ *  componentDidUpdate() method of the component{
+ *  }
+ *
+ */
+
