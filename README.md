@@ -1,5 +1,12 @@
 # React
 
+-   [Overview](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#overview)
+-   [React Hooks](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#react-hooks)
+-   [How React Works](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#how-react-works)
+-   [Understanding React Class Component Life Cycle](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#understanding-react-lifecycle)
+
+## Overview
+
 -   Does efficient DOM manipulation with Virtual DOM.
 -   Has Diff algorithm which is very efficient and does the re-render.
 
@@ -31,7 +38,7 @@
 
 React components go through several lifecycle phases, each with specific methods that can be overridden to run code at particular times in the process. Here's a breakdown of the main lifecycle methods:
 
-[]()
+![Class Component Life Cycle](https://github.com/sathwick18/react/blob/main/food-ordering/public/react-class-component-life-Cycle.jpeg)
 
 ### **1. Constructor**
 
