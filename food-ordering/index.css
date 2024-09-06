@@ -1,5 +1,5 @@
 #heading {
-    color : red
+    color: red;
 }
 
 .header {
@@ -61,7 +61,6 @@
     cursor: pointer;
 }
 
-
 .shimmer-container {
     display: flex;
     flex-wrap: wrap;
@@ -76,5 +75,10 @@
 
 .login {
     cursor: pointer;
-    padding : 0 20px;
+    padding: 0 20px;
+}
+
+.user-card {
+    border: black solid;
+    padding: 10px;
 }
