@@ -8,9 +8,18 @@ class UserClass extends React.Component {
             count: 0,
             count2: 0,
         };
+
+        console.log("Child Constructor Called");
+    }
+
+    componentDidMount() {
+        // this will be called when this component is rendered and mounted on the actual DOM element.
+        console.log("Child Component Did Mount Called");
     }
 
     render() {
+        console.log("Child Render Called");
+
         const { name, location } = this.props;
 
         const { count, count2 } = this.state;
