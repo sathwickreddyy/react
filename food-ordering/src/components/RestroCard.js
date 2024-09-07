@@ -17,4 +17,20 @@ const RestroCard = (props) => {
     );
 };
 
+// Creating a Higher Order Component.
+
+// Accepts RestroCard as input and returns RestroCardPromoted card funciton.
+
+export const withDiscountLabel = (RestaurantCard) => {
+    return (props) => {
+        const { header, subHeader } = props.resInfo.info.aggregatedDiscountInfoV3;
+        return (
+            <div>
+                <label className='absolute bg-black text-white rounded-lg p-1'>{header + " - " + subHeader} </label>
+                <RestaurantCard resInfo={props.resInfo} />
+            </div>
+        );
+    };
+};
+
 export default RestroCard;

@@ -1,5 +1,5 @@
 import React from "react";
-import RestroCard from "./RestroCard";
+import RestroCard, { withDiscountLabel } from "./RestroCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -13,6 +13,8 @@ const Body = () => {
     const [filteredRestaurents, setFilteredRestaurents] = useState([]); // equivalent
 
     const [searchText, setSearchText] = useState("");
+
+    const RestaurantCardDiscounted = withDiscountLabel(RestroCard);
 
     useEffect(() => {
         fetchData();
@@ -83,7 +85,11 @@ const Body = () => {
             <div className='flex flex-wrap'>
                 {filteredRestaurents.map((restroInfo) => (
                     <Link key={restroInfo.info.id} to={"/restaurants/" + restroInfo.info?.id}>
-                        <RestroCard resInfo={restroInfo} />
+                        {restroInfo.info.aggregatedDiscountInfoV3 ? (
+                            <RestaurantCardDiscounted resInfo={restroInfo} />
+                        ) : (
+                            <RestroCard resInfo={restroInfo} />
+                        )}
                     </Link>
                 ))}
             </div>
