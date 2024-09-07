@@ -6,9 +6,9 @@ const RestroCard = (props) => {
     const { name, cuisines, avgRating, costForTwo } = resInfo?.info;
     const { slaString } = resInfo?.info?.sla;
     return (
-        <div className='restro-card'>
-            <img className='restro-logo' src={CDN_URL + resInfo.info.cloudinaryImageId} alt='restaurant' />
-            <h3>{name}</h3>
+        <div className='m-4 p-4 w-[250px] bg-gray-200 hover:bg-gray-600'>
+            <img className='restro-logo rounded-xl' src={CDN_URL + resInfo.info.cloudinaryImageId} alt='restaurant' />
+            <h3 className='font-bold py-4 text-lg'>{name}</h3>
             <h4>{cuisines.join(", ")}</h4>
             <h4>{avgRating} ⭐️</h4>
             <h4>{costForTwo}</h4>

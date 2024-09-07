@@ -41,17 +41,18 @@ const Body = () => {
         <Shimmer />
     ) : (
         <div className='body'>
-            <div className='filter'>
-                <div className='search'>
+            <div className='filter flex'>
+                <div className='search m-4 p-4'>
                     <input
                         type='text'
-                        className='search-box'
+                        className='border-solid border to-black'
                         value={searchText}
                         onChange={(event) => {
                             setSearchText(event.target.value);
                         }}
                     />
                     <button
+                        className='px-4 py-1 bg-green-100 m-4 rounded-lg'
                         onClick={() => {
                             // Filter restaurants and update the UI.
 
@@ -67,17 +68,19 @@ const Body = () => {
                         Search
                     </button>
                 </div>
-                <button
-                    className='filter-btn'
-                    onClick={() => {
-                        const filteredList = listOfRestaurentData.filter((r) => r.info.avgRating > 4);
-                        setListOfRestaurent(filteredList);
-                    }}
-                >
-                    Top Rated Restaurents
-                </button>
+                <div className='m-4 p-4 flex items-center'>
+                    <button
+                        className='px-4 py-1 bg-gray-100'
+                        onClick={() => {
+                            const filteredList = listOfRestaurentData.filter((r) => r.info.avgRating > 4);
+                            setListOfRestaurent(filteredList);
+                        }}
+                    >
+                        Top Rated Restaurents
+                    </button>
+                </div>
             </div>
-            <div className='restro-container'>
+            <div className='flex flex-wrap'>
                 {filteredRestaurents.map((restroInfo) => (
                     <Link key={restroInfo.info.id} to={"/restaurants/" + restroInfo.info?.id}>
                         <RestroCard resInfo={restroInfo} />
