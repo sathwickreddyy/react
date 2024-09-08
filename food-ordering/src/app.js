@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,8 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
+
 // import Grocery from "./components/Grocery";
 
 /**
@@ -23,17 +25,27 @@ const Grocery = lazy(() => import("./components/Grocery"));
 // To fix above, we need to have some suspense because the browser takes some time to fetch the grocery data when invoked, this will need some delay. So inorder to
 // to fix it, we need to add Suspense Component wrapperd over the component.
 const AppLayout = () => {
+    const [userName, setUserName] = useState();
+
+    // authentication
+    useEffect(() => {
+        // Make an API Call to fetch username and password.
+        const data = {
+            name: "Sathwick Reddy, Yalla",
+        };
+
+        setUserName(data.name);
+    }, []);
+
+    // We should set context across application.
+
     return (
-        <div className='app'>
-            <Header />
-            <Outlet /> {/** This will be replaced by childs according to path */}
-            {/** if path is / */}
-            {/* <Body /> */}
-            {/** if path is /about */}
-            {/* <About /> */}
-            {/** if path is /contact */}
-            {/* <Contact /> */}
-        </div>
+        <UserContext.Provider value={{ loggedInUser: userName }}>
+            <div className='app'>
+                <Header />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
     );
 };
 
