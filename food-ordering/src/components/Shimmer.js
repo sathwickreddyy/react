@@ -1,6 +1,8 @@
+import React from "react";
+
 const Shimmer = () => {
     return (
-        <div className='shimmer'>
+        <div className='bg-gray-500'>
             <div className='shimmer-container'>
                 <div className='shimmer-card'></div>
                 <div className='shimmer-card'></div>

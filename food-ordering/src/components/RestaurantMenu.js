@@ -2,6 +2,7 @@ import React from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/hooks/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
     const { restaurantId } = useParams();
@@ -13,32 +14,26 @@ const RestaurantMenu = () => {
     }
 
     const menuItemCards =
-        resInfo?.data?.cards[4]?.groupedCard.cardGroupMap?.REGULAR.cards[5]?.card?.card?.itemCards ||
-        resInfo?.data?.cards[4]?.groupedCard.cardGroupMap?.REGULAR.cards[5]?.card?.card?.categories[0]?.itemCards;
-    console.log("Item cards", menuItemCards);
+        resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards[5]?.card?.card?.itemCards ||
+        resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards[5]?.card?.card?.categories[0]?.itemCards;
+
+    const categories =
+        resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+            (c) => c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+        ) || [];
+
+    console.log("Categories", categories);
 
     const { name, costForTwoMessage, cuisines } = resInfo?.data?.cards[2]?.card?.card?.info;
 
     return (
-        <div className='restaurant-menu'>
-            <h1>Name of the Restaurant: {name}</h1>
-            <h3>Cuisines: {cuisines.join(", ")}</h3>
-            <h3>{costForTwoMessage}</h3>
-            <h1>Menu</h1>
-            <ul>
-                {menuItemCards.map((itemCard) => {
-                    return (
-                        <div key={itemCard.card.info.id}>
-                            <li>
-                                {itemCard.card.info.name} : Rs.{" "}
-                                {itemCard.card.info.finalPrice / 100 ||
-                                    itemCard.card.info.price / 100 ||
-                                    itemCard.card.info.defaultPrice / 100}
-                            </li>
-                        </div>
-                    );
-                })}
-            </ul>
+        <div className='text-center'>
+            <h1 className='font-bold my-10 text-3xl'>{name}</h1>
+            <p className='font-bold text-lg'>Cuisines: {cuisines.join(", ")}</p>
+            {/* Build Categories Accordians */}
+            {categories.map((category, index) => {
+                return <RestaurantCategory key={index} data={category?.card?.card} />;
+            })}
         </div>
     );
 };
