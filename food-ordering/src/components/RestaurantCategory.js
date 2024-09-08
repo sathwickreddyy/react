@@ -6,7 +6,7 @@ const RestaurantCategory = (props) => {
     const { data, showItems, setShowIndex } = props;
 
     const handleClick = () => {
-        setShowIndex();
+        setShowIndex(!showItems);
     };
 
     return (
