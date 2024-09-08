@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../public/logo.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
     const [btnName, setBtnName] = useState("Login");
 
     const onlineStatus = useOnlineStatus();
+
+    const data = useContext(UserContext);
+
+    console.log(data);
 
     useEffect(() => {
         console.log("Header useEffect Called");
@@ -33,7 +38,7 @@ const Header = () => {
                     <li className='px-4'>
                         <Link to='/contact'>Contact</Link>
                     </li>
-                    <li className='px-4'>Cart</li>
+                    {btnName === "Logout" && <li className='px-4'>{data.loggedInUser}</li>}
                     <button
                         className='px-4'
                         onClick={() => {
@@ -42,7 +47,7 @@ const Header = () => {
                             } else if (btnName === "Logout") {
                                 setBtnName("Login");
                             }
-                            console.log(btnName);
+                            // console.log(btnName);
                         }}
                     >
                         {btnName}
