@@ -1,7 +1,16 @@
 import React from "react";
 import { CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/redux/cartSlice";
 
 export const ItemList = ({ items }) => {
+    const dispatch = useDispatch();
+
+    const handleAddItem = (item) => {
+        // Dipatch an action to the action list in Cart Slice.
+        dispatch(addItem(item)); // name of the action is addItem in cartSlice.
+    };
+
     return (
         <div>
             <ul>
@@ -33,7 +42,10 @@ export const ItemList = ({ items }) => {
                                 <p className='text-xs font-extralight text-left py-4'>{description}</p>
                             </div>
                             <div className='relative w-1/6'>
-                                <button className='absolute  bg-black bottom-0 right-0 cursor-pointer text-white px-3 py-1 rounded-lg'>
+                                <button
+                                    onClick={() => handleAddItem(item)}
+                                    className='absolute  bg-black bottom-0 right-0 cursor-pointer text-white px-3 py-1 rounded-lg'
+                                >
                                     Add +
                                 </button>
                                 <img className='w-full h-full rounded-lg' src={CDN_URL + imageId} alt='/' />
@@ -45,3 +57,5 @@ export const ItemList = ({ items }) => {
         </div>
     );
 };
+
+export default ItemList;

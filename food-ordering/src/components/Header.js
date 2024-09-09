@@ -17,6 +17,7 @@ const Header = () => {
 
     // Step 6: Now subsribe to the store using a Selector.
     const cartItems = useSelector((store) => store.cart.items);
+    console.log(cartItems);
 
     useEffect(() => {
         console.log("Header useEffect Called");
@@ -42,7 +43,9 @@ const Header = () => {
                     <li className='px-4'>
                         <Link to='/contact'>Contact</Link>
                     </li>
-                    <li className='px-2 text-lg font-bold'>Cart ({cartItems.length} items)</li>
+                    <li className='px-2 text-lg font-bold'>
+                        <Link to='/cart'>Cart ({cartItems.length} items)</Link>
+                    </li>
                     {btnName === "Logout" && <li className='px-4'>{data.loggedInUser}</li>}
                     <button
                         className='px-4'
