@@ -8,6 +8,8 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import applicationStore from "./utils/redux/applicationStore";
 
 // import Grocery from "./components/Grocery";
 
@@ -40,12 +42,15 @@ const AppLayout = () => {
     // We should set context across application.
 
     return (
-        <UserContext.Provider value={{ loggedInUser: userName }}>
-            <div className='app'>
-                <Header />
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        // Step 2: Provided our store to our app.
+        <Provider store={applicationStore}>
+            <UserContext.Provider value={{ loggedInUser: userName }}>
+                <div className='app'>
+                    <Header />
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
     );
 };
 

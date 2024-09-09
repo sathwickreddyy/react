@@ -4,6 +4,7 @@
 -   [React Hooks](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#react-hooks)
 -   [How React Works](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#how-react-works)
 -   [Understanding React Class Component Life Cycle](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#understanding-react-lifecycle)
+-   [Understanding Redux](https://github.com/sathwick18/react/tree/main?tab=readme-ov-file#understanding-redux-toolkit)
 
 ## Overview
 
@@ -71,3 +72,26 @@ Once the state is updated (for example, after an API call), the component will r
 -   **Lifecycle Phases:** React lifecycle methods are categorized into three main phases: **Mounting**, **Updating**, and **Unmounting**.
 -   **Best Practices:** Avoid side effects in the `render` method. Use lifecycle methods like `componentDidMount` and `componentDidUpdate` for side effects such as data fetching and DOM manipulation.
 -   **React Hooks:** In functional components, similar effects are achieved using hooks like `useEffect`, which can mimic the behavior of `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`.
+
+## Understanding Redux Toolkit
+
+-   We have few jargon likes, Reducer, Selector, Action Dispatcher, Redux Store, Slices to understand Redux Toolkit.
+
+### Installation
+
+-   Install @reduxjs/toolkit and react-redux dependencies.
+
+```
+    npm i @reduxjs/toolkit react-redux 
+```
+
+1. Build our store
+2. Connect our store to our app.
+3. Slick (Cart Slice)
+4. Dispatch (action) - Reducer.
+5. Selector
+
+![Redux Notes 1](https://github.com/sathwick18/react/blob/main/food-ordering/public/Redux.jpeg)
+
+-   In the above picture,
+    Upon Clicking -> Dispatches Action -> Triggers Reducer Function -> Updates Slice in Redux Store -> Publishes the changes to all the components which were **Subsribed** to the Selectors of Slice -> React Component i.e., Cart get's Updated.
