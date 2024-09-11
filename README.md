@@ -82,7 +82,7 @@ Once the state is updated (for example, after an API call), the component will r
 -   Install @reduxjs/toolkit and react-redux dependencies.
 
 ```
-    npm i @reduxjs/toolkit react-redux 
+    npm i @reduxjs/toolkit react-redux
 ```
 
 1. Build our store
@@ -95,3 +95,56 @@ Once the state is updated (for example, after an API call), the component will r
 
 -   In the above picture,
     Upon Clicking -> Dispatches Action -> Triggers Reducer Function -> Updates Slice in Redux Store -> Publishes the changes to all the components which were **Subsribed** to the Selectors of Slice -> React Component i.e., Cart get's Updated.
+
+## Testing
+
+-   Unit testing.
+-   Integration testing.
+-   End to End testing - e2e testing.
+
+-   [We need to use react testing library for testing purpose](https://testing-library.com/docs/react-testing-library/intro/)
+
+```
+npm i -D @testing-library/react
+```
+
+    -   React uses framework called jest.
+        -   Install associated [dependencies](https://jestjs.io/docs/tutorial-react) using babel.
+        ```
+        npm install --save-dev babel-jest @babel/core @babel/preset-env
+        ```
+        - Configure Babel.
+
+        ```
+            babel.config.js
+            module.exports = {
+            presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+            };
+        ```
+
+        - [Configure Parcel Config file to disable default babel traspilation from parceljs](https://parceljs.org/languages/javascript/#usage-with-other-tools)
+        ```
+            .parcelrc:
+            {
+            "extends": "@parcel/config-default",
+            "transformers": {
+                "*.{js,mjs,jsx,cjs,ts,tsx}": [
+                "@parcel/transformer-js",
+                "@parcel/transformer-react-refresh-wrap"
+                ]
+            }
+            }
+        ```
+    - Configure package.json scripts section to enable tests with jest.
+    - Jest configuration
+        ```
+            npx jest --init
+        ```
+        - Use jsdom test enviornment.
+        - Add coverage report
+        - Provider babel
+        - y for mock calls before every test.
+    - Install js dom library [why?](https://testing-library.com/docs/react-testing-library/setup#jest-28)
+        ```
+        npm install --save-dev jest-environment-jsdom
+        ```
