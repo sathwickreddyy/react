@@ -108,12 +108,15 @@ Once the state is updated (for example, after an API call), the component will r
 npm i -D @testing-library/react
 ```
 
-    -   React uses framework called jest.
-        -   Install associated [dependencies](https://jestjs.io/docs/tutorial-react) using babel.
+-   React uses framework called jest.
+
+    -   Install associated [dependencies](https://jestjs.io/docs/tutorial-react) using babel.
+
         ```
         npm install --save-dev babel-jest @babel/core @babel/preset-env
         ```
-        - Configure Babel.
+
+        -   Configure Babel.
 
         ```
             babel.config.js
@@ -122,7 +125,8 @@ npm i -D @testing-library/react
             };
         ```
 
-        - [Configure Parcel Config file to disable default babel traspilation from parceljs](https://parceljs.org/languages/javascript/#usage-with-other-tools)
+        -   [Configure Parcel Config file to disable default babel traspilation from parceljs](https://parceljs.org/languages/javascript/#usage-with-other-tools)
+
         ```
             .parcelrc:
             {
@@ -135,16 +139,45 @@ npm i -D @testing-library/react
             }
             }
         ```
-    - Configure package.json scripts section to enable tests with jest.
-    - Jest configuration
+
+    -   Configure package.json scripts section to enable tests with jest.
+    -   Jest configuration
         ```
             npx jest --init
         ```
-        - Use jsdom test enviornment.
-        - Add coverage report
-        - Provider babel
-        - y for mock calls before every test.
-    - Install js dom library [why?](https://testing-library.com/docs/react-testing-library/setup#jest-28)
+        -   Use jsdom test enviornment.
+        -   Add coverage report
+        -   Provider babel
+        -   y for mock calls before every test.
+    -   Install js dom library [why?](https://testing-library.com/docs/react-testing-library/setup#jest-28)
+
         ```
         npm install --save-dev jest-environment-jsdom
+        ```
+
+        -   **Error occured during test case run**
+
+        ```
+        Details:
+
+            SyntaxError: /Users/sathwick/MyOffice/Projects/Learning/react/food-ordering/src/components/__tests__/Contanct.test.js: Support for the experimental syntax 'jsx' isn't currently enabled (5:12):
+
+            3 |
+            4 | test("Should load contact us component", () => {
+            > 5 |     render(<Contact />); // will render to jsdom
+                |            ^
+            6 |
+            7 |     const heading = screen.getByRole("heading");
+            8 |
+
+            Add @babel/preset-react (https://github.com/babel/babel/tree/main/packages/babel-preset-react) to the 'presets' section of your Babel config to enable transformation.
+        ```
+
+        -   Fix: Install library to make JSX work in test cases
+        ```
+        	    npm i -D @babel/preset-react
+        ```
+
+        ```
+            Add ["@babel/preset-react", { runtime: "automatic" }], to presets in babel.config.js
         ```
