@@ -181,3 +181,12 @@ npm i -D @testing-library/react
         ```
             Add ["@babel/preset-react", { runtime: "automatic" }], to presets in babel.config.js
         ```
+
+        -   **Error occured during test case run again: TypeError: expect(...).toBeInTheDocument is not a function**
+
+        Fix: Install @testing-library/jest-dom
+
+        ```
+        	npm i -D @testing-library/jest-dom
+
+        ```
