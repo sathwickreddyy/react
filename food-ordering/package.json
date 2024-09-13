@@ -6,7 +6,8 @@
         "//": "For production mode i.e., npm run build",
         "start": "parcel index.html",
         "build": "parcel build index.html",
-        "test": "jest"
+        "test": "jest",
+        "watch-test": "jest --watch"
     },
     "author": "Sathwick Reddy, Yalla",
     "license": "ISC",

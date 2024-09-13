@@ -6,11 +6,8 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 
 const Body = () => {
-    // Creating Local State Variable - Super powerful variable.
-    // useState function returns a state variable in a list..
-    // first param is the name of the variable, second is the function to modify the variable.
-    const [listOfRestaurentData, setListOfRestaurent] = useState([]); // equivalent to let listOfRestro=[];
-    const [filteredRestaurents, setFilteredRestaurents] = useState([]); // equivalent
+    const [listOfRestaurentData, setListOfRestaurent] = useState([]);
+    const [filteredRestaurents, setFilteredRestaurents] = useState([]);
 
     const [searchText, setSearchText] = useState("");
 
@@ -28,7 +25,7 @@ const Body = () => {
         const json = await data.json();
         // console.log(json);
         const rests = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-        console.log("Restaurents Data Fetched ", rests);
+        // console.log("Restaurents Data Fetched ", rests);
         setListOfRestaurent(rests);
         setFilteredRestaurents(rests);
     };
