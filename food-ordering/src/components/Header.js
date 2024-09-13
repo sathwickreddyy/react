@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import logo from "../../public/logo.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
@@ -13,20 +12,13 @@ const Header = () => {
 
     const data = useContext(UserContext);
 
-    console.log(data);
-
     // Step 6: Now subsribe to the store using a Selector.
     const cartItems = useSelector((store) => store.cart.items);
-    console.log(cartItems);
-
-    useEffect(() => {
-        console.log("Header useEffect Called");
-    }, []);
 
     return (
         <div className='flex justify-between bg-pink-100 shadow-lg mt-2'>
             <div className='logo-container'>
-                <img className='w-48' src={logo} alt='logo' />
+                <img className='w-48' src={"../../public/logo.png"} alt='logo' />
             </div>
             <div className='flex items-center'>
                 <ul className='flex p-4 m-4'>
