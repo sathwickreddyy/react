@@ -44,6 +44,7 @@ const Body = () => {
                 <div className='search m-4 p-4'>
                     <input
                         type='text'
+                        data-testid='searchInput'
                         className='border-solid border to-black'
                         value={searchText}
                         onChange={(event) => {
@@ -58,7 +59,7 @@ const Body = () => {
                             const filteredRestaurents = listOfRestaurentData.filter((resInfo) =>
                                 resInfo.info.name.toLowerCase().includes(searchText.toLowerCase()),
                             );
-                            console.log(filteredRestaurents);
+                            // console.log(filteredRestaurents);
                             if (filteredRestaurents.length > 0) {
                                 setFilteredRestaurents(filteredRestaurents);
                             }
@@ -71,8 +72,8 @@ const Body = () => {
                     <button
                         className='px-4 py-1 bg-gray-100'
                         onClick={() => {
-                            const filteredList = listOfRestaurentData.filter((r) => r.info.avgRating > 4);
-                            setListOfRestaurent(filteredList);
+                            const filteredList = listOfRestaurentData.filter((r) => r.info.avgRating > 4.5);
+                            setFilteredRestaurents(filteredList);
                         }}
                     >
                         Top Rated Restaurents

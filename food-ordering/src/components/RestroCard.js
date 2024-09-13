@@ -6,7 +6,7 @@ const RestroCard = (props) => {
     const { name, cuisines, avgRating, costForTwo } = resInfo?.info;
     const { slaString } = resInfo?.info?.sla;
     return (
-        <div className='m-4 p-4 w-[250px] h-[500px] bg-gray-200 hover:bg-gray-600'>
+        <div data-testid='resCard' className='m-4 p-4 w-[250px] h-[500px] bg-gray-200 hover:bg-gray-600'>
             <img className='h-6/12 restro-logo rounded-xl' src={CDN_URL + resInfo.info.cloudinaryImageId} alt='restaurant' />
             <div className='h-6/12 flex flex-col justify-between'>
                 <h3 className='font-bold py-4 text-lg'>{name}</h3>
