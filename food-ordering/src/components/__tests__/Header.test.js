@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Header from "../Header";
 import { Provider } from "react-redux";
 import applicationStore from "../../utils/redux/applicationStore";
@@ -38,4 +38,23 @@ it("Should load Header Component With A login Button", () => {
     const loginButton = screen.getByRole("button", { name: "Login" });
 
     expect(loginButton).toBeInTheDocument();
+});
+
+it("Should change login to logout on click on button", () => {
+    render(
+        <BrowserRouter>
+            <Provider store={applicationStore}>
+                <Header />
+            </Provider>
+        </BrowserRouter>,
+    );
+
+    const loginButton = screen.getByRole("button", { name: "Login" });
+
+    fireEvent.click(loginButton);
+
+    const logoutButton = screen.getByRole("button", { name: "Logout" });
+
+    expect(loginButton).toBeInTheDocument();
+    expect(logoutButton).toBeInTheDocument();
 });
