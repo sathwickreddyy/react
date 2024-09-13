@@ -24,7 +24,7 @@ const RestaurantMenu = () => {
             (c) => c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
         ) || [];
 
-    console.log("Categories", categories);
+    // console.log("Categories", categories);
 
     const { name, costForTwoMessage, cuisines } = resInfo?.data?.cards[2]?.card?.card?.info;
 

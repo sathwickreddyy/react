@@ -17,7 +17,7 @@ export const ItemList = ({ items }) => {
                 {items.map((item) => {
                     const { name, id, price, finalPrice, defaultPrice, description, imageId } = item?.card?.info;
                     return (
-                        <div key={id} className='p-2 m-2 border-gray-200 border-b-2 flex justify-between'>
+                        <div data-testid='foodItems' key={id} className='p-2 m-2 border-gray-200 border-b-2 flex justify-between'>
                             <div className='w-5/6 text-left origin-left'>
                                 <div>
                                     <span>{name}</span>
