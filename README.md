@@ -27,7 +27,7 @@
                 -   If not present, the useEffect function will be called for every rendering.
                 -   if [] is provided, the useEffect function will be called only once, even if the component re-renders multiple times the useEffect function will not be called.
                 -   if dependency array holds any state variables, the useEffect function will be called only when state variables are changed.
-                
+
 ## How React Works?
 
 -   Reacts uses **Reconciliation Algorithm** which uses **ReactFiber**.
@@ -101,6 +101,8 @@ Once the state is updated (for example, after an API call), the component will r
 -   Unit testing.
 -   Integration testing.
 -   End to End testing - e2e testing.
+
+### Unit Testing
 
 -   [We need to use react testing library for testing purpose](https://testing-library.com/docs/react-testing-library/intro/)
 
