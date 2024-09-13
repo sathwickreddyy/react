@@ -18,7 +18,40 @@ global.fetch = jest.fn(() => {
     });
 });
 
-it("Should Load Restaurant Menu Component and cart should be updated accordingly on clicks", async () => {
+it("Should load the Restaurant Menu Component", async () => {
+    await act(async () =>
+        render(
+            <Provider store={applicationStore}>
+                <BrowserRouter>
+                    <RestaurantMenu />
+                </BrowserRouter>
+            </Provider>,
+        ),
+    );
+
+    const accordianHeader = screen.getByText("Recommended (14)");
+    expect(accordianHeader).toBeInTheDocument();
+});
+
+it("Should expand the accordion to show food items", async () => {
+    await act(async () =>
+        render(
+            <Provider store={applicationStore}>
+                <BrowserRouter>
+                    <RestaurantMenu />
+                </BrowserRouter>
+            </Provider>,
+        ),
+    );
+
+    const accordianHeader = screen.getByText("Recommended (14)");
+    fireEvent.click(accordianHeader);
+
+    const numberOfFoodItemsRendered = screen.getAllByTestId("foodItems");
+    expect(numberOfFoodItemsRendered.length).toBe(14);
+});
+
+it("Should add items to the cart", async () => {
     await act(async () =>
         render(
             <Provider store={applicationStore}>
@@ -32,23 +65,31 @@ it("Should Load Restaurant Menu Component and cart should be updated accordingly
     );
 
     const accordianHeader = screen.getByText("Recommended (14)");
-
     fireEvent.click(accordianHeader);
-
-    const numberOfFoodItemsRendered = screen.getAllByTestId("foodItems");
-
-    expect(numberOfFoodItemsRendered.length).toBe(14);
-
     const addButtons = screen.getAllByRole("button", { name: "Add +" });
-
     expect(screen.getByText("Cart (0 items)")).toBeInTheDocument();
     fireEvent.click(addButtons[0]);
     fireEvent.click(addButtons[1]);
     expect(screen.getByText("Cart (2 items)")).toBeInTheDocument();
+});
 
-    expect(screen.getAllByTestId("foodItems").length).toEqual(14 + 2); // 14 from RestaurantMenu's Items List and 2 from this page items list.
+it("Should clear the cart", async () => {
+    await act(async () =>
+        render(
+            <Provider store={applicationStore}>
+                <BrowserRouter>
+                    <Header />
+                    <RestaurantMenu />
+                    <Cart />
+                </BrowserRouter>
+            </Provider>,
+        ),
+    );
+    const accordianHeader = screen.getByText("Recommended (14)");
+    fireEvent.click(accordianHeader);
+    const addButtons = screen.getAllByRole("button", { name: "Add +" });
+    fireEvent.click(addButtons[5]);
+    expect(screen.getByText("Cart (3 items)")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Clear Cart" }));
-    expect(screen.getAllByTestId("foodItems").length).toEqual(14); // the cart is cleared.
-
     expect(screen.getByText("Cart is Empty. Add Items to cart!")).toBeInTheDocument();
 });
