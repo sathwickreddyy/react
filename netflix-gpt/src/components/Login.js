@@ -1,37 +1,109 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Header } from "./Header";
+import { checkValidData } from "../utils/validate";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
+    const [validationErrorMessage, setValidationErrorMessage] = useState(null);
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+    const confirmPasswordRef = useRef(null);
 
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
+    };
+
+    const handleButtonClick = () => {
+        //Validate form data
+        if (isSignInForm) {
+            const errorMsg = checkValidData(emailRef.current.value, passwordRef.current.value);
+            setValidationErrorMessage(errorMsg);
+            if (errorMsg == null) console.log("Validated");
+        } else {
+            let errorMsg = checkValidData(emailRef.current.value, passwordRef.current.value);
+            if (passwordRef.current.value !== confirmPasswordRef.current.value) errorMsg = "Passwords didn't match";
+            setValidationErrorMessage(errorMsg);
+            if (errorMsg == null) console.log("Validated");
+        }
     };
 
     const SignInComponent = () => {
         return (
             <div>
                 <h1 className='font-bold text-3xl py-4'>Sign In</h1>
-                <input type='text' placeholder='Email Address' className='w-full p-5 my-3  bg-gray-600' />
-                <input type='password' placeholder='Password' className='w-full p-5 my-3 bg-gray-600' />
-                <button className='w-full py-4 my-6 -red-200 bg-red-600 rounded-lg cursor-pointer'> Sign In</button>
-                <p className='py-4' onClick={() => toggleSignInForm()}>
+                <input
+                    ref={emailRef}
+                    type='text'
+                    id='sign-in-email'
+                    name='email'
+                    autoComplete='email'
+                    placeholder='Enter your email'
+                    className='w-full p-5 my-3 bg-gray-600'
+                />
+                <input
+                    ref={passwordRef}
+                    type='password'
+                    id='sign-in-password'
+                    name='password'
+                    autoComplete='password'
+                    placeholder='Password'
+                    className='w-full p-5 my-3 bg-gray-600'
+                />
+                <p className='font-semibold text-sm text-red-600'>{validationErrorMessage != null && validationErrorMessage}</p>
+                <button className='w-full py-4 my-6 bg-red-600 rounded-lg cursor-pointer' onClick={handleButtonClick}>
+                    Sign In
+                </button>
+                <p className='py-4' onClick={toggleSignInForm}>
                     New to Netflix? Sign up Now
                 </p>
             </div>
         );
     };
 
-    const SignOutComponent = () => {
+    const SignUpComponent = () => {
         return (
             <div>
-                <h1 className='font-bold text-3xl py-4'>Sign Out</h1>
-                <input type='text' placeholder='Full Name' className='w-full p-5 my-3  bg-gray-600' />
-                <input type='text' placeholder='Email Address' className='w-full p-5 my-3  bg-gray-600' />
-                <input type='password' placeholder='Password' className='w-full p-5 my-3  bg-gray-600' />
-                <input type='password' placeholder='Confirm Password' className='w-full p-5 my-3  bg-gray-600' />
-                <button className='w-full py-4 my-6 -red-200 bg-red-600 rounded-lg cursor-pointer'>Register</button>
-                <p className='py-4' onClick={() => toggleSignInForm()}>
+                <h1 className='font-bold text-3xl py-4'>Sign Up</h1>
+                <input
+                    type='text'
+                    id='full-name'
+                    name='full-name'
+                    autoComplete='username'
+                    placeholder='Full Name'
+                    className='w-full p-5 my-3 bg-gray-600'
+                />
+                <input
+                    type='text'
+                    ref={emailRef}
+                    id='sign-up-email'
+                    name='email'
+                    autoComplete='email'
+                    placeholder='Email Address'
+                    className='w-full p-5 my-3 bg-gray-600'
+                />
+                <input
+                    type='password'
+                    ref={passwordRef}
+                    id='sign-up-password'
+                    name='password'
+                    placeholder='Password'
+                    autoComplete='new-password'
+                    className='w-full p-5 my-3 bg-gray-600'
+                />
+                <input
+                    type='password'
+                    id='confirm-password'
+                    ref={confirmPasswordRef}
+                    name='confirm-password'
+                    autoComplete='new-password'
+                    placeholder='Confirm Password'
+                    className='w-full p-5 my-3 bg-gray-600'
+                />
+                <p className='font-semibold text-sm text-red-600'>{validationErrorMessage != null && validationErrorMessage}</p>
+                <button className='w-full py-4 my-6 bg-red-600 rounded-lg cursor-pointer' onClick={handleButtonClick}>
+                    Register
+                </button>
+                <p className='py-4' onClick={toggleSignInForm}>
                     Already Registered? Sign in Now.
                 </p>
             </div>
@@ -39,17 +111,20 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div
+            className='h-screen bg-cover bg-center'
+            style={{
+                backgroundImage:
+                    "url('https://assets.nflxext.com/ffe/siteui/vlv3/85ff76db-39e5-423a-afbc-97d3e74db71b/null/IN-en-20240909-TRIFECTA-perspective_b22117e0-4610-4d57-a695-20f77d241a4a_large.jpg')",
+            }}
+            aria-label='login-background'
+        >
             <Header />
-            <div className='absolute'>
-                <img
-                    className='w-full'
-                    src='https://assets.nflxext.com/ffe/siteui/vlv3/85ff76db-39e5-423a-afbc-97d3e74db71b/null/IN-en-20240909-TRIFECTA-perspective_b22117e0-4610-4d57-a695-20f77d241a4a_large.jpg'
-                    alt='login background'
-                />
-            </div>
-            <form className='text-white w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 bg-opacity-70'>
-                {isSignInForm ? <SignInComponent /> : <SignOutComponent />}
+            <form
+                onSubmit={(e) => e.preventDefault()}
+                className='text-white w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 bg-opacity-70 rounded-xl'
+            >
+                {isSignInForm ? <SignInComponent /> : <SignUpComponent />}
             </form>
         </div>
     );
