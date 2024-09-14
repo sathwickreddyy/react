@@ -4,6 +4,7 @@
 
 -   Home/
 -   login/ Sign up (if not authenticated for all urls)
+    -   login form
     -   Post authentication, redirect to browse page
 -   Browse/ (after authentication)
     -   Header
