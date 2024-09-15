@@ -3,3 +3,12 @@ export const NETFLIX_LOGO =
 
 export const USER_AVATAR =
     "https://occ-0-5690-3663.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXTZ87gWedgajar1VOIJQNIy2U1sulesgGCIouHnReQp2bCq_rcl2zhI9rRDXIzT_X7240ZzVOcfMQ1DXAPdFsyGu2QeFd8.png?r=145";
+
+export const API_OPTIONS = {
+    method: "GET",
+    headers: {
+        accept: "application/json",
+        Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDk3YjhkNDc1NmMxOTViOTk0NDdmMDRiZmRmNGE0ZSIsIm5iZiI6MTcyNjQwNjc2OC41ODkzNzgsInN1YiI6IjY2ZTZkZTkwZTgyMTFlY2QyMmIwODkzMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.aIcMRG-pmx55fcE3o90LxclYw5N5t3q_NywY_HWeSu0",
+    },
+};
