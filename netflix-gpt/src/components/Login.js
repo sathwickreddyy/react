@@ -4,7 +4,6 @@ import { checkValidData } from "../utils/validate";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
@@ -13,7 +12,6 @@ const Login = () => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
-    const navigate = useNavigate();
 
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
@@ -31,7 +29,6 @@ const Login = () => {
             signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    navigate("/browse");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -54,7 +51,6 @@ const Login = () => {
                         displayName: nameRef.current.value,
                         photoURL: "https://avatars.githubusercontent.com/u/66886237?v=4",
                     }).then(() => {
-                        navigate("/login");
                     });
                     setErrorMessage("Sign Up Successful");
                 })
