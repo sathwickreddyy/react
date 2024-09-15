@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Header } from "./Header";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [successMessage, setSuccessMessage] = useState(null);
+    const nameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
@@ -25,15 +25,12 @@ const Login = () => {
         if (isSignInForm) {
             if (errorMsg !== null) {
                 setErrorMessage(errorMsg);
-                setSuccessMessage(null);
                 return;
             }
             // login
             signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
                 .then((userCredential) => {
-                    // Signed in
                     const user = userCredential.user;
-                    setSuccessMessage("User Authentication Successful... Redirecting to home page");
                     navigate("/browse");
                 })
                 .catch((error) => {
@@ -45,7 +42,6 @@ const Login = () => {
             if (passwordRef.current.value !== confirmPasswordRef.current.value) errorMsg = "Passwords didn't match";
             if (errorMsg !== null) {
                 setErrorMessage(errorMsg);
-                setSuccessMessage(null);
                 return;
             }
             // Sign up
@@ -53,16 +49,20 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up
                     const user = userCredential.user;
-                    console.log("Signed in ", user);
-                    setSuccessMessage("Registration Successful");
-                    // ...
+                    // update user details
+                    updateProfile(auth.currentUser, {
+                        displayName: nameRef.current.value,
+                        photoURL: "https://avatars.githubusercontent.com/u/66886237?v=4",
+                    }).then(() => {
+                        navigate("/login");
+                    });
+                    setErrorMessage("Sign Up Successful");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     // ..
                     setErrorMessage(errorCode + "-" + errorMessage);
-                    setSuccessMessage(null);
                 });
         }
     };
@@ -90,7 +90,6 @@ const Login = () => {
                     className='w-full p-5 my-3 bg-gray-600'
                 />
                 <p className='font-semibold text-sm text-red-600'>{errorMessage != null && errorMessage}</p>
-                <p className='text-green-400 font-semibold text-center'>{successMessage != null && successMessage}</p>
                 <button className='w-full py-4 my-6 bg-red-600 rounded-lg cursor-pointer' onClick={handleButtonClick}>
                     Sign In
                 </button>
@@ -106,6 +105,7 @@ const Login = () => {
             <div>
                 <h1 className='font-bold text-3xl py-4'>Sign Up</h1>
                 <input
+                    ref={nameRef}
                     type='text'
                     id='full-name'
                     name='full-name'
@@ -141,7 +141,6 @@ const Login = () => {
                     className='w-full p-5 my-3 bg-gray-600'
                 />
                 <p className='font-semibold text-sm text-red-600'>{errorMessage != null && errorMessage}</p>
-                <p className='text-green-400 font-semibold text-center'>{successMessage != null && successMessage}</p>
                 <button className='w-full py-4 my-6 bg-red-600 rounded-lg cursor-pointer' onClick={handleButtonClick}>
                     Register
                 </button>

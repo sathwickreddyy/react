@@ -3,7 +3,7 @@
 ## Planning
 
 -   Home/
--   login/ Sign up (if not authenticated for all urls)
+-   login/ Sign up (if not authenticated for all urls) [Done]
     -   login form
     -   Post authentication, redirect to browse page
 -   Browse/ (after authentication)

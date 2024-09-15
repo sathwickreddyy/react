@@ -2,9 +2,11 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
     const navigate = useNavigate();
+    const user = useSelector((store) => store.user);
 
     const handleSignout = () => {
         signOut(auth)
@@ -24,16 +26,14 @@ export const Header = () => {
                 alt='Netflix Logo'
             />
 
-            <div className='flex p-2'>
-                <img
-                    className='w-16 h-16 p-2'
-                    alt='usericon'
-                    src='https://occ-0-5690-3663.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXTZ87gWedgajar1VOIJQNIy2U1sulesgGCIouHnReQp2bCq_rcl2zhI9rRDXIzT_X7240ZzVOcfMQ1DXAPdFsyGu2QeFd8.png?r=145'
-                />
-                <button onClick={handleSignout} className='font-bold text-white'>
-                    (Sign Out)
-                </button>
-            </div>
+            {user && (
+                <div className='flex p-2'>
+                    <img className='w-16 h-16 p-2' alt='usericon' src={user?.photoURL} />
+                    <button onClick={handleSignout} className='font-bold text-white'>
+                        (Sign Out)
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
