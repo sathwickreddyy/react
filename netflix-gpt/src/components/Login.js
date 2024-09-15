@@ -4,6 +4,7 @@ import { checkValidData } from "../utils/validate";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
@@ -49,9 +50,8 @@ const Login = () => {
                     // update user details
                     updateProfile(auth.currentUser, {
                         displayName: nameRef.current.value,
-                        photoURL: "https://avatars.githubusercontent.com/u/66886237?v=4",
-                    }).then(() => {
-                    });
+                        photoURL: USER_AVATAR,
+                    }).then(() => {});
                     setErrorMessage("Sign Up Successful");
                 })
                 .catch((error) => {
@@ -86,7 +86,7 @@ const Login = () => {
                     className='w-full p-5 my-3 bg-gray-600'
                 />
                 <p className='font-semibold text-sm text-red-600'>{errorMessage != null && errorMessage}</p>
-                <button className='w-full py-4 my-6 bg-red-600 rounded-lg cursor-pointer' onClick={handleButtonClick}>
+                <button className='w-full py-4 my-6 bg-red-600 rounded-xl cursor-pointer' onClick={handleButtonClick}>
                     Sign In
                 </button>
                 <p className='py-4' onClick={toggleSignInForm}>
