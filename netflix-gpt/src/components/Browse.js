@@ -3,6 +3,9 @@ import { Header } from "./Header";
 import useNowPlayingMovies from "../utils/customHooks/useNowPlayingMovies";
 import MainContainer from "./browse-components/MainContainer";
 import SecondaryContainer from "./browse-components/SecondaryContainer";
+import usePopularMovies from "../utils/customHooks/usePopularMovies";
+import useUpcomingMovies from "../utils/customHooks/useUpcomingMovies";
+import useTopRatedMovies from "../utils/customHooks/useTopRatedMovies";
 
 /* 
 Planning:
@@ -20,6 +23,9 @@ Planning:
 */
 const Browse = () => {
     useNowPlayingMovies();
+    usePopularMovies();
+    useUpcomingMovies();
+    useTopRatedMovies();
 
     return (
         <div>
