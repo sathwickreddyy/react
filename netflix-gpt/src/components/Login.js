@@ -4,7 +4,7 @@ import { checkValidData } from "../utils/validate";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { USER_AVATAR } from "../utils/constants";
+import { NETFLIX_LOGIN_BACKGROUND, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
@@ -151,8 +151,7 @@ const Login = () => {
         <div
             className='h-screen bg-cover bg-center'
             style={{
-                backgroundImage:
-                    "url('https://assets.nflxext.com/ffe/siteui/vlv3/85ff76db-39e5-423a-afbc-97d3e74db71b/null/IN-en-20240909-TRIFECTA-perspective_b22117e0-4610-4d57-a695-20f77d241a4a_large.jpg')",
+                backgroundImage: `url('${NETFLIX_LOGIN_BACKGROUND}')`,
             }}
             aria-label='login-background'
         >
