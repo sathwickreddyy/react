@@ -10,7 +10,7 @@ const MainContainer = () => {
 
     if (!movies) return; // api hasn't fetched the data, after fetch it will re-render. this is called as early return
 
-    const mainMovie = movies[5];
+    const mainMovie = movies[9];
 
     const { original_title, overview, id } = mainMovie;
 
