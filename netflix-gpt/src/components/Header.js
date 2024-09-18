@@ -11,6 +11,7 @@ import { changeLanguage } from "../utils/redux/configSlice";
 export const Header = () => {
     const navigate = useNavigate();
     const user = useSelector((store) => store.user);
+    const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -65,15 +66,17 @@ export const Header = () => {
 
             {user && (
                 <div className='flex p-2'>
-                    <select className='px-4 py-2 mx-4 my-2 bg-gray-800 text-white' onChange={handleLanguageChange}>
-                        {SUPPORTED_LANGUAGES.map((lang) => (
-                            <option key={lang.identifier} value={lang.identifier}>
-                                {lang.name}
-                            </option>
-                        ))}
-                    </select>
+                    {showGPTSearch && (
+                        <select className='px-4 py-2 mx-4 my-2 bg-gray-800 text-white' onChange={handleLanguageChange}>
+                            {SUPPORTED_LANGUAGES.map((lang) => (
+                                <option key={lang.identifier} value={lang.identifier}>
+                                    {lang.name}
+                                </option>
+                            ))}
+                        </select>
+                    )}
                     <button className='px-4 py-2 bg-purple-800 mx-4 my-2 text-white rounded-xl' onClick={handleGPTSearchClick}>
-                        GPT Search
+                        {!showGPTSearch ? "GPT Search" : "Home"}
                     </button>
                     <img className='w-16 h-16 p-2' alt='usericon' src={user?.photoURL} />
                     <button onClick={handleSignout} className='font-bold text-white'>
