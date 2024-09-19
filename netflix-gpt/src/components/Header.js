@@ -54,6 +54,7 @@ export const Header = () => {
     const handleGPTSearchClick = () => {
         // Toggle GPT Search
         dispatch(toggleGPTSearchView());
+        
     };
 
     const handleLanguageChange = (event) => {
