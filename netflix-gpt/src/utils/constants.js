@@ -32,3 +32,8 @@ export const SUPPORTED_LANGUAGES = [
         name: "Spanish",
     },
 ];
+
+export const OPEN_AI_API_KEY = "sk-Kpxox7ohdcE9QrpM0mIFitrMzI0t8e9LIADSstJEN-T3BlbkFJ4vk3XbulgQg6JQkbcWKJkmzj2tFZb5n7dStJZ1c7AA";
+
+//https://console.groq.com/docs/quickstart
+export const GROG_AI_API_KEY = "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";
