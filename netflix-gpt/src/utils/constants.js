@@ -8,8 +8,7 @@ export const API_OPTIONS = {
     method: "GET",
     headers: {
         accept: "application/json",
-        Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NDk3YjhkNDc1NmMxOTViOTk0NDdmMDRiZmRmNGE0ZSIsIm5iZiI6MTcyNjQwNjc2OC41ODkzNzgsInN1YiI6IjY2ZTZkZTkwZTgyMTFlY2QyMmIwODkzMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.aIcMRG-pmx55fcE3o90LxclYw5N5t3q_NywY_HWeSu0",
+        Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
     },
 };
 
@@ -33,7 +32,7 @@ export const SUPPORTED_LANGUAGES = [
     },
 ];
 
-export const OPEN_AI_API_KEY = "sk-Kpxox7ohdcE9QrpM0mIFitrMzI0t8e9LIADSstJEN-T3BlbkFJ4vk3XbulgQg6JQkbcWKJkmzj2tFZb5n7dStJZ1c7AA";
+export const OPEN_AI_API_KEY = process.env.REACT_APP_OPEN_AI_API_KEY;
 
 //https://console.groq.com/docs/quickstart
-export const GROG_AI_API_KEY = "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";
+export const GROG_AI_API_KEY = process.env.REACT_APP_GROG_AI_API_KEY;

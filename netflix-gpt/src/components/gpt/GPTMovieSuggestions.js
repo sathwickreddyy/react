@@ -4,7 +4,7 @@ import MovieList from "../browse-components/MovieList";
 
 const GPTMovieSuggestions = () => {
     const { tmdbMovieResults, movieNames } = useSelector((store) => store.gpt.recommendations);
-    if (!movieNames | !tmdbMovieResults) return;
+    if (!movieNames.length | !tmdbMovieResults) return;
     console.log(movieNames, tmdbMovieResults);
     return (
         <div className='p-4 m-4 bg-black text-white opacity-90'>
