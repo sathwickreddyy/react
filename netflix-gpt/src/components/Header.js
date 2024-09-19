@@ -54,7 +54,6 @@ export const Header = () => {
     const handleGPTSearchClick = () => {
         // Toggle GPT Search
         dispatch(toggleGPTSearchView());
-        
     };
 
     const handleLanguageChange = (event) => {
@@ -62,11 +61,11 @@ export const Header = () => {
     };
 
     return (
-        <div className='absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between'>
-            <img className='w-44' src={NETFLIX_LOGO} alt='Netflix Logo' />
+        <div className='absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row md: justify-between'>
+            <img className='w-44 mx-auto md:mx-0' src={NETFLIX_LOGO} alt='Netflix Logo' />
 
             {user && (
-                <div className='flex p-2'>
+                <div className='flex p-2 justify-between'>
                     {showGPTSearch && (
                         <select className='px-4 py-2 mx-4 my-2 bg-gray-800 text-white' onChange={handleLanguageChange}>
                             {SUPPORTED_LANGUAGES.map((lang) => (
@@ -79,7 +78,7 @@ export const Header = () => {
                     <button className='px-4 py-2 bg-purple-800 mx-4 my-2 text-white rounded-xl' onClick={handleGPTSearchClick}>
                         {!showGPTSearch ? "GPT Search" : "Home"}
                     </button>
-                    <img className='w-16 h-16 p-2' alt='usericon' src={user?.photoURL} />
+                    <img className='hidden md:block w-16 h-16 p-2' alt='usericon' src={user?.photoURL} />
                     <button onClick={handleSignout} className='font-bold text-white'>
                         (Sign Out)
                     </button>
