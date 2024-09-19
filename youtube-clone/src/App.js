@@ -1,3 +1,21 @@
+import Body from "./components/Body";
+import Header from "./components/Header";
+import { Provider } from "react-redux";
+import applicationStore from "./utils/redux/applicationStore";
+
+function App() {
+    return (
+        <Provider store={applicationStore}>
+            <div className='App'>
+                <Header />
+                <Body />
+            </div>
+        </Provider>
+    );
+}
+
+export default App;
+
 /**
  * Home
  *  Header,
@@ -9,13 +27,3 @@
  *        VideoContainer
  *          VideoCard
  */
-
-function App() {
-    return (
-        <div className='App'>
-            <div>Bunny Reddy</div>
-        </div>
-    );
-}
-
-export default App;
