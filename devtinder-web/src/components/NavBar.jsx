@@ -1,5 +1,8 @@
+// eslint-disable-next-line no-unused-vars
+import React from 'react'
+
 const NavBar = () => {
-    return(
+    return (
         <div className="navbar bg-base-300">
             <div className="flex-1">
                 <a className="btn btn-ghost text-xl">Dev Tinder 👨🏻‍💻</a>
