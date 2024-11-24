@@ -1,8 +1,10 @@
+import NavBar from "./components/NavBar.jsx";
+
 function App() {
 
   return (
       <>
-          <h1>Hello From Dev Tinder</h1>
+          <NavBar />
       </>
   )
 }
