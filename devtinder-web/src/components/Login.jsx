@@ -10,6 +10,7 @@ const Login = () => {
     const password = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [error, setError] = React.useState("");
 
     const handleLogin = async () => {
         try{
@@ -19,11 +20,12 @@ const Login = () => {
             }, {
                 withCredentials: true // setting this to enable cookies to be set when made CORS req to backend.
             });
-            console.log(response.data);
             dispatch(addUser(response.data));
+            setError("")
             navigate("/");
         }
         catch (e) {
+            setError(e.response?.data?.error || "Something went Wrong");
             console.error(e)
         }
     }
@@ -51,6 +53,7 @@ const Login = () => {
                                    className="input input-bordered w-full max-w-xs"/>
                         </label>
                     </div>
+                    { error!=="" && <p className={"text-red-500"}>{"Error: "+error}</p> }
                     <div className="card-actions justify-center">
                         <button className="btn btn-primary" onClick={() => handleLogin()}>Login</button>
                     </div>

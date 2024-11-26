@@ -1,10 +1,29 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import {useSelector} from "react-redux";
-import {Link} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router";
+import axios from "axios";
+import {BACKEND_BASE_URL} from "../utils/constants.jsx";
+import {removeUser} from "../utils/redux/slices/userSlice.jsx";
 
 const NavBar = () => {
     const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await axios.post(BACKEND_BASE_URL+"/logout", {}, {
+                withCredentials: true
+            });
+            dispatch(removeUser());
+            navigate("/login");
+        }
+        catch (e)
+        {
+            console.error(e);
+        }
+    }
 
     return (
         <div className="navbar bg-base-300">
@@ -25,12 +44,10 @@ const NavBar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <Link to={"/profile"}>
-                            <a className="justify-between">
                                 Profile
                                 <span className="badge">New</span>
-                            </a>
                         </Link>
-                        <Link to={"/Login"}><a>Logout</a></Link>
+                        <li><a onClick={handleLogout}>Logout</a></li>
                     </ul>
                 </div>}
             </div>
