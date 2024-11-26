@@ -1,19 +1,27 @@
 import React, {useRef} from 'react'
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {addUser} from "../utils/redux/slices/userSlice.jsx";
+import {useNavigate} from "react-router";
+import {BACKEND_BASE_URL} from "../utils/constants.jsx";
 
 const Login = () => {
     const email = useRef();
     const password = useRef();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try{
-            const response = await axios.post("http://localhost:7777/login", {
+            const response = await axios.post(BACKEND_BASE_URL + "/login", {
                 email: email.current.value,
                 password: password.current.value
             }, {
                 withCredentials: true // setting this to enable cookies to be set when made CORS req to backend.
             });
-            console.log(response)
+            console.log(response.data);
+            dispatch(addUser(response.data));
+            navigate("/");
         }
         catch (e) {
             console.error(e)
