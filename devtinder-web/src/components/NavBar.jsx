@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router";
 import axios from "axios";
 import {BACKEND_BASE_URL} from "../utils/constants.jsx";
 import {removeUser} from "../utils/redux/slices/userSlice.jsx";
+import {removeFeed} from "../utils/redux/slices/feedSlice.jsx";
 
 const NavBar = () => {
     const user = useSelector((store) => store.user);
@@ -17,6 +18,7 @@ const NavBar = () => {
                 withCredentials: true
             });
             dispatch(removeUser());
+            dispatch(removeFeed());
             navigate("/login");
         }
         catch (e)
