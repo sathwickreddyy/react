@@ -32,15 +32,15 @@ const EditProfile = ({user}) => {
             });
             dispatch(addUser(res?.data?.data));
             setStatus("Profile Update Successful")
-            setTimeout(() => {
-                setStatus(undefined)
-            }, 3000)
         }
         catch (e) {
             console.error(e);
             setError(e.response?.data?.error);
             setStatus("Profile Update Failed")
         }
+        setTimeout(() => {
+            setStatus(undefined)
+        }, 3000)
     }
 
     return (
