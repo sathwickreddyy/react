@@ -31,7 +31,7 @@ const Feed = () => {
 
     return feed && (
         <div className={"flex justify-center my-10"}>
-            <UserCard userInfo={feed.data[0]}/>
+            { feed.data.length > 0 ? <UserCard userInfo={feed.data[0]}/>  : <h1>No More Users found! Upgrade to Premium</h1>}
         </div>
     )
 }
