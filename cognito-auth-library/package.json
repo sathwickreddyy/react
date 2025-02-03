@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^6.10.1",
+    "@tailwindcss/vite": "^4.0.3",
     "@types/react-router-dom": "^5.3.3",
     "amazon-cognito-identity-js": "^6.3.12",
     "aws-amplify": "^6.12.2",
     "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.1.4"
+    "react-phone-input-2": "^2.15.1",
+    "react-router-dom": "^7.1.5",
+    "tailwindcss": "^4.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
