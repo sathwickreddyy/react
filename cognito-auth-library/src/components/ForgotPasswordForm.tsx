@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import {useAuth} from "../configurations/AuthContext.tsx";
+import {CurrentViewOptions} from "../configurations/types.ts";
 
 const ForgotPasswordForm = () => {
     const [username, setUsername] = useState('');
     const [code, setCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [step, setStep] = useState(1);
-    const { forgotPassword, resetPassword, loading, error } = useAuth();
+    const { forgotPassword, resetPassword, loading, error, setCurrentView } = useAuth();
 
     const handleSendCode = async (e: React.FormEvent) => {
         e.preventDefault();
+        console.log("Sending verification code to update password")
         await forgotPassword(username);
+        console.log("Verification code sent successfully");
         setStep(2);
     };
 
     const handleResetPassword = async (e: React.FormEvent) => {
         e.preventDefault();
         await resetPassword(username, code, newPassword);
+        console.log("Password reset successfully");
+        setCurrentView(CurrentViewOptions.LOGIN);
     };
 
     return (
@@ -85,6 +90,7 @@ const ForgotPasswordForm = () => {
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
                         disabled={loading}
+                        onClick={handleResetPassword}
                     >
                         {loading ? 'Resetting Password...' : 'Reset Password'}
                     </button>

@@ -13,11 +13,17 @@ const SignupForm = memo(() => {
     const [gender, setGender] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const { signup, loading, error, setCurrentView } = useAuth();
+    const auth = useAuth();
+    const { signup, loading, error, setCurrentView } = auth
+    const setupUserNameForOtherComponents = auth.setUsername;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await signup(username, firstName+" "+lastName, password, email, gender, "+"+phoneNumber);
+        const isSuccess = await signup(username, firstName+" "+lastName, password, email, gender, "+"+phoneNumber);
+        if(isSuccess){
+            setupUserNameForOtherComponents(username);
+            setCurrentView(CurrentViewOptions.CONFIRM_SIGNUP);
+        }
     };
 
     return (

@@ -1,19 +1,29 @@
 import React, {createContext, useCallback, useContext, useState} from 'react';
 import { CognitoAuthConfig, CurrentViewOptions} from './types';
-import {confirmResetPassword, signIn} from '@aws-amplify/auth';
+import {resetPassword as amplifyForgotPassword, confirmResetPassword, resendSignUpCode, signIn} from '@aws-amplify/auth';
 import {confirmUserSignUp, signUpUser} from "../services/cognitoService.ts";
 import {Amplify} from "aws-amplify";
-import awsconfig from "../hooks/aws-exports.ts";
+import awsConfig from "../hooks/aws-exports.ts";
+
+
+export interface ConfirmSignUpResponseProps {
+    success: boolean,
+    userId?: string,
+    nextStep?: any
+}
 
 export interface AuthContextType {
     user: unknown | null;
+    username: string;
+    setUsername: (username: string) => void;
+    resendConfirmationCode:  () => Promise<void>;
     loading: boolean;
     error: string | null;
     login: (username: string, password: string) => Promise<void>;
-    signup: (username: string, name: string, password: string, email: string, gender: string, phoneNumber: string) => Promise<void>;
+    signup: (username: string, name: string, password: string, email: string, gender: string, phoneNumber: string) => Promise<boolean>;
     forgotPassword: (username: string) => Promise<void>;
     resetPassword: (username: string, code: string, newPassword: string) => Promise<void>;
-    confirmSignUp: (username: string, code: string) => Promise<void>;
+    confirmSignUp: (username: string, code: string) => Promise<ConfirmSignUpResponseProps>;
     currentView: CurrentViewOptions;
     setCurrentView: (view: CurrentViewOptions) => void;
 }
@@ -47,9 +57,10 @@ export const CognitoAuthProvider: React.FC<{
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [currentView, setCurrentView] = useState<CurrentViewOptions>(initialView);
+    const [username, setUsername] = useState<string>('');
 
     // Initialises configuration with Cognito
-    Amplify.configure(awsconfig(config));
+    Amplify.configure(awsConfig(config));
 
     const handleError = useCallback((error: unknown) => {
         const message = error instanceof Error ? error.message : 'An unknown error occurred';
@@ -62,6 +73,8 @@ export const CognitoAuthProvider: React.FC<{
         try {
             const result = await signIn({ username, password });
             setUser(result);
+            console.log("User logged in successfully", result);
+            alert("Login successful");
         } catch (error) {
             handleError(error);
         } finally {
@@ -74,29 +87,50 @@ export const CognitoAuthProvider: React.FC<{
         try {
             await signUpUser(username, name, password, email, gender, phoneNumber);
             setCurrentView(CurrentViewOptions.LOGIN);
+            return true;
         } catch (error) {
             handleError(error);
         } finally {
             setLoading(false);
         }
+        return false;
     }, [handleError]);
 
     const confirmSignUp = useCallback(async (username: string, code: string) => {
         setLoading(true);
+        let response: ConfirmSignUpResponseProps = {success: false};
         try {
-            await confirmUserSignUp(username, code);
+            response = await confirmUserSignUp(username, code);
+            if(response.success){
+                alert("Account verification successful, please login....")
+            }
         } catch (error) {
             handleError(error);
         } finally {
             setLoading(false);
         }
+        return response;
     }, [handleError]);
+
+    const resendConfirmationCode = useCallback(async () => {
+        setLoading(true);
+        console.log("Re-Sending verification code for user {} ...", username);
+        try {
+            await resendSignUpCode({ username });
+            // Optionally set a success message
+            console.log("Verification code resent successfully");
+        } catch (error) {
+            handleError(error);
+        } finally {
+            setLoading(false);
+        }
+    }, [username, handleError]);
 
     const forgotPassword = useCallback(async (username: string) => {
         setLoading(true);
         try {
-            await forgotPassword(username);
-            setCurrentView(CurrentViewOptions.LOGIN);
+            console.log("Forgot password for user {} ...", username);
+            await amplifyForgotPassword({username});
         } catch (error) {
             handleError(error);
         } finally {
@@ -130,7 +164,10 @@ export const CognitoAuthProvider: React.FC<{
             resetPassword,
             confirmSignUp,
             currentView,
-            setCurrentView
+            setCurrentView,
+            username,
+            setUsername,
+            resendConfirmationCode
         }}>
             {children}
         </AuthContext.Provider>

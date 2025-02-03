@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import {useAuth} from "../configurations/AuthContext.tsx";
+import {ConfirmSignUpResponseProps, useAuth} from "../configurations/AuthContext.tsx";
+import {CurrentViewOptions} from "../configurations/types.ts";
 
-const ConfirmationForm = (username:string) => {
+const ConfirmationForm = () => {
     const [code, setCode] = useState('');
-    const { confirmSignUp, loading, error } = useAuth();
+    const { confirmSignUp, loading, error, setCurrentView, username, resendConfirmationCode } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await confirmSignUp(username, code);
+        const response: ConfirmSignUpResponseProps= await confirmSignUp(username, code);
+        if(response.success){
+            setCurrentView(CurrentViewOptions.LOGIN);
+        }
     };
+
+    const handleResendCode = async () => {
+        await resendConfirmationCode();
+        alert("Verification code resent successfully");
+    }
 
     return (
         <div className="space-y-6">
             <h2 className="text-3xl font-extrabold text-center text-gray-900">Confirm Account</h2>
-
             {error && <div className="text-red-600 text-center">{error}</div>}
-
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                     <label htmlFor="code" className="block text-sm font-medium text-gray-700">
@@ -39,6 +46,16 @@ const ConfirmationForm = (username:string) => {
                 >
                     {loading ? 'Confirming...' : 'Confirm Account'}
                 </button>
+
+                <div className="text-center">
+                    <button
+                        onClick={handleResendCode}
+                        className="text-blue-600 hover:text-blue-800"
+                        disabled={loading}
+                    >
+                        Resend confirmation code
+                    </button>
+                </div>
             </form>
         </div>
     );

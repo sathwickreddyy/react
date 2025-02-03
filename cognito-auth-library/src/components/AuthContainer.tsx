@@ -2,6 +2,7 @@ import {memo} from 'react';
 import {useAuth} from "../configurations/AuthContext.tsx";
 import {ForgotPasswordForm, LoginForm, SignupForm} from "../index.tsx";
 import {CurrentViewOptions} from "../configurations/types.ts";
+import ConfirmationForm from "./ConfirmationForm.tsx";
 
 
 const AuthContainer = memo(() => {
@@ -12,6 +13,7 @@ const AuthContainer = memo(() => {
             {currentView === CurrentViewOptions.LOGIN && <LoginForm />}
             {currentView === CurrentViewOptions.SIGNUP && <SignupForm />}
             {currentView === CurrentViewOptions.FORGOT_PASSWORD && <ForgotPasswordForm />}
+            {currentView === CurrentViewOptions.CONFIRM_SIGNUP && <ConfirmationForm/>}
         </div>
     );
 });
