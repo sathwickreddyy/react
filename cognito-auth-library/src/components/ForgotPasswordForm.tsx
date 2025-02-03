@@ -21,6 +21,7 @@ const ForgotPasswordForm = () => {
         e.preventDefault();
         await resetPassword(username, code, newPassword);
         console.log("Password reset successfully");
+        alert("Password reset successful");
         setCurrentView(CurrentViewOptions.LOGIN);
     };
 

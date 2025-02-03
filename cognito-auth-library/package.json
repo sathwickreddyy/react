@@ -1,13 +1,19 @@
 {
   "name": "cognito-auth-library",
-  "private": true,
-  "version": "0.0.0",
+  "main": "dist/index.js",
+  "module": "dist/types/index.js",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": "^18.0.0",
+    "@aws-amplify/auth": "^6.0.0"
   },
   "dependencies": {
     "@aws-amplify/auth": "^6.10.1",
@@ -36,6 +42,8 @@
     "prettier": "^3.4.2",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
+    "vite": "^6.0.5",
+    "rollup": "^3.0.0",
+    "@rollup/plugin-typescript": "^11.0.0"
   }
 }
