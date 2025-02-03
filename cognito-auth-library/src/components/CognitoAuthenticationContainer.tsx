@@ -5,7 +5,7 @@ import {CurrentViewOptions} from "../configurations/types.ts";
 import ConfirmationForm from "./ConfirmationForm.tsx";
 
 
-const AuthContainer = memo(() => {
+const CognitoAuthenticationContainer = memo(() => {
     const { currentView } = useAuth();
 
     return (
@@ -18,4 +18,4 @@ const AuthContainer = memo(() => {
     );
 });
 
-export default AuthContainer;
+export default CognitoAuthenticationContainer;

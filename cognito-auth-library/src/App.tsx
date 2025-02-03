@@ -1,4 +1,4 @@
-import {AuthContainer, CognitoAuthProvider} from "./index.tsx";
+import {CognitoAuthenticationContainer, CognitoAuthProvider} from "./index.tsx";
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
                 region: 'ap-southeast-2',
             }
         }>
-            <AuthContainer />
+            <CognitoAuthenticationContainer />
         </CognitoAuthProvider>
     )
 }
