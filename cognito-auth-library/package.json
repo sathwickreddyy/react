@@ -2,7 +2,7 @@
   "name": "@sathwickreddyy/cognito-auth-library",
   "main": "dist/index.js",
   "module": "dist/types/index.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",

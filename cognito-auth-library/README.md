@@ -105,7 +105,14 @@ return <ForgotPassword />;
 
 1. Build the library:
 ```bash
+npm version patch  # Updates version from 1.0.0 → 1.0.1
 npm run build
+```
+Note:
+```text
+npm version major  # 1.0.0 → 2.0.0
+npm version minor  # 1.0.0 → 1.1.0 
+npm version patch  # 1.0.0 → 1.0.1
 ```
 
 2. Login to npm:
@@ -126,23 +133,24 @@ Sample `vite.config.ts`:
 ```ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+
 export default defineConfig({
-build: {
-lib: {
-entry: 'src/index.ts',
-name: 'ReactCognitoAuth',
-fileName: (format) => react-cognito-auth.${format}.js
-},
-rollupOptions: {
-external: ['react', 'react-dom'],
-output: {
-globals: {
-react: 'React'
-}
-}
-}
-},
-plugins: [react()]
+  build: {
+    lib: {
+      entry: 'src/index.ts',
+      name: 'ReactCognitoAuth',
+      fileName: (format) => `react-cognito-auth.${format}.js`
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React'
+        }
+      }
+    }
+  },
+  plugins: [react()]
 });
 ```
 
