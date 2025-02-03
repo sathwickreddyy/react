@@ -1,7 +1,7 @@
 import React, {createContext, useCallback, useContext, useState} from 'react';
 import { CognitoAuthConfig, CurrentViewOptions} from './types';
 import {resetPassword as amplifyForgotPassword, confirmResetPassword, resendSignUpCode, signIn} from '@aws-amplify/auth';
-import {confirmUserSignUp, signUpUser} from "../services/cognitoService.ts";
+import {confirmUserSignUp, signOutUser, signUpUser} from "../services/cognitoService.ts";
 import {Amplify} from "aws-amplify";
 import awsConfig from "../hooks/aws-exports.ts";
 
@@ -21,6 +21,7 @@ export interface AuthContextType {
     error: string | null;
     login: (username: string, password: string) => Promise<void>;
     signup: (username: string, name: string, password: string, email: string, gender: string, phoneNumber: string) => Promise<boolean>;
+    signOut: () => Promise<void>;
     forgotPassword: (username: string) => Promise<void>;
     resetPassword: (username: string, code: string, newPassword: string) => Promise<void>;
     confirmSignUp: (username: string, code: string) => Promise<ConfirmSignUpResponseProps>;
@@ -167,7 +168,8 @@ export const CognitoAuthProvider: React.FC<{
             setCurrentView,
             username,
             setUsername,
-            resendConfirmationCode
+            resendConfirmationCode,
+            signOut: signOutUser
         }}>
             {children}
         </AuthContext.Provider>

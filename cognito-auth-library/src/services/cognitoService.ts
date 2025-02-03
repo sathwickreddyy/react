@@ -1,4 +1,4 @@
-import {signIn, signUp, signOut, confirmSignUp, resendSignUpCode} from '@aws-amplify/auth';
+import { signUp, signOut, confirmSignUp} from '@aws-amplify/auth';
 
 /**
  * Signup User
@@ -58,31 +58,6 @@ export const confirmUserSignUp = async (
 
     } catch (error) {
         console.error('Error confirming sign-up:', error);
-        throw error;
-    }
-};
-
-export const resendUserSignupCode = async (username: string) => {
-    try {
-        await resendSignUpCode({username});
-        console.log('Verification code resent successfully');
-    }
-    catch (error) {
-        console.error('Error resending verification code:', error);
-        throw error;
-    }
-}
-
-
-/**
- * Sign in an existing user.
- */
-export const signInUser = async (username: string, password: string) => {
-    try {
-        const { isSignedIn } = await signIn({ username, password });
-        return isSignedIn;
-    } catch (error) {
-        console.error('Error signing in:', error);
         throw error;
     }
 };
