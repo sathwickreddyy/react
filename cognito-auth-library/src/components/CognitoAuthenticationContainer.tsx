@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import {useAuth} from "../configurations/AuthContext.tsx";
+import {useAuth} from "../configurations/CognitoAuthProviderContext.tsx";
 import {ForgotPasswordForm, LoginForm, SignupForm} from "../index.tsx";
 import {CurrentViewOptions} from "../configurations/types.ts";
 import ConfirmationForm from "./ConfirmationForm.tsx";

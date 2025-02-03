@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {ConfirmSignUpResponseProps, useAuth} from "../configurations/AuthContext.tsx";
+import {ConfirmSignUpResponseProps, useAuth} from "../configurations/CognitoAuthProviderContext.tsx";
 import {CurrentViewOptions} from "../configurations/types.ts";
 
 const ConfirmationForm = () => {

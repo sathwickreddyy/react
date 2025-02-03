@@ -30,7 +30,7 @@ export interface AuthContextType {
 }
 
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const CognitoAuthProviderContext = createContext<AuthContextType | undefined>(undefined);
 
 /**
  * Provides an authentication context for the given children.
@@ -155,7 +155,7 @@ export const CognitoAuthProvider: React.FC<{
     }, [handleError]);
 
     return (
-        <AuthContext.Provider value={{
+        <CognitoAuthProviderContext.Provider value={{
             user,
             loading,
             error,
@@ -172,12 +172,12 @@ export const CognitoAuthProvider: React.FC<{
             signOut: signOutUser
         }}>
             {children}
-        </AuthContext.Provider>
+        </CognitoAuthProviderContext.Provider>
     );
 };
 
 export const useAuth = () => {
-    const context = useContext(AuthContext);
+    const context = useContext(CognitoAuthProviderContext);
     if (!context) {
         throw new Error('useAuth must be used within an AuthProvider');
     }

@@ -1,7 +1,7 @@
 import React, {memo, useState} from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import {useAuth} from "../configurations/AuthContext.tsx";
+import {useAuth} from "../configurations/CognitoAuthProviderContext.tsx";
 import {CurrentViewOptions} from "../configurations/types.ts";
 
 const SignupForm = memo(() => {
